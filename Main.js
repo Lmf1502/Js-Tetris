@@ -1,0 +1,17 @@
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+canvas.height = 600;
+canvas.width = 600;
+const rows = 20;
+const columns = 10;
+const cellSize = 20;
+const Grid = new grid(columns,rows);
+const Renderer = new renderer(ctx,cellSize,canvas.width,canvas.height);
+const Tetris = new tetris(Grid,Renderer);
+const stepInterval = 500;
+const fps = 5;
+const Animator = new animator(fps,stepInterval,()=>{Tetris.moveMino("down")});
+const Joystick = new joystick(Tetris,Animator);
+Tetris.spawnMino();
+Renderer.drawGrid(Grid.grid);
+Animator.start();
